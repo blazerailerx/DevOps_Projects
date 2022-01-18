@@ -1,8 +1,9 @@
 # Project 1
+
 ## LAMP stack implementation
 
-Summary: This project was geared towards putting together, the technologies required to build a website using HTML, CSS, PHP and MySQL
-The project was hosted on AWS cloud. On an Ubuntu 20.01 lts Linux instance. 
+Summary: This project was geared towards putting together, the technologies required to build a website using HTML, CSS, PHP and MySQL.
+In order to complete this project, an Apache server, a MySQL server and PHP were installed on a linux server. The project was hosted on AWS cloud. On an Ubuntu 20.04 lts Linux instance. 
 
 **Installation of the packages:**
 
