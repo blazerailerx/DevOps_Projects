@@ -7,17 +7,18 @@ While a php based website could be developed with the stack of technologies depl
 it can also be achieved with a slight variation in the the technologies used. On this project, an NGINX server, a MySQL server and PHP were used. 
 The end result was still the same as that of the previous project.
 This project was geared towards putting together, the technologies required to build a website using HTML, CSS, PHP and MySQL
+To add a little spin to this one, a php script to retrieve data from a MySQL database.
 The project was hosted on AWS cloud. On an Ubuntu 20.04 lts Linux instance.
 
 * The Linux server was updated and NGINX was installed on it.
 
-![System updated and web server installed](Project2_images/updates_and_nginx_installed.png)
+![System updated and web server installed](media/Project2_images/updates_and_nginx_installed.png)
 
 Confirmed the web server was running by checking the status of the service:
 ```bash
 sudo systemctl status apache2
 ```
-![Status of the web server](Project2_images/nginx_running.png)
+![Status of the web server](media/Project2_images/nginx_running.png)
 
 
 
@@ -25,20 +26,20 @@ Also checked to see the websites could be hosted on it by checking what was runn
 ```bash
 curl http://localhost:80
 ```
-![Accessing port 80 on the machine](Project2_images/default_website_up_and_running.png)
+![Accessing port 80 on the machine](media/Project2_images/default_website_up_and_running.png)
 
 * The next step was to install MySQL server and secure it:
 ```bash
 sudo apt install mysql-server
 ```
 
-![Installation of MySQL server installed](Project2_images/MySQL-server_installed.png)
+![Installation of MySQL server installed](media/Project2_images/MySQL-server_installed.png)
 
 
 ```bash
 mysql_secure_installation
 ```
-![Installation of MySQL server installed](Project2_images/MySQL-server_securing.png)
+![Installation of MySQL server installed](media/Project2_images/MySQL-server_securing.png)
 
 * Configuring NGINX to host our website 
 A folder was created in `/var/www/` to host the website files 
@@ -51,7 +52,7 @@ sudo mkdir /var/www/projectLEMP
 ```
 
 The next step was to configure a virtual host for the ngnix server in the `/etc/nginx/sites-available` directory with the file named after the project with the following config:
-![sites available config](Project2_images/nginx_sites-available_config.png)
+![sites available config](media/Project2_images/nginx_sites-available_config.png)
 
  * listen — Defines what port Nginx will listen on. In this case, it will listen on port 80, the default port for HTTP.
  * root — Defines the document root where the files served by this website are stored.
@@ -70,7 +71,7 @@ The virtual host was activate by linking the file in the `sites-available` direc
 sudo ln -s /etc/nginx/sites-available/projectLEMP /etc/nginx/sites-enabled/
 ```
 
-![Testing our configurations for nginx](Project2_images/nginx_config_test.png)
+![Testing our configurations for nginx](media/Project2_images/nginx_config_test.png)
 To test the effectiveness of this,
 ```bash 
 sudo nginx -t
@@ -82,31 +83,31 @@ sudo echo 'Hello LEMP from hostname' $(curl -s http://169.254.169.254/latest/met
 ```
 So accessing the server's address through a browser shows the content of the index.html file:
 
-![index.html page](Project2_images/html_index_page.png)
+![index.html page](media/Project2_images/html_index_page.png)
 
 The site was also tested to confirm the ability to server php files by creating a `php.info` file in the directory. 
 This file was deleted afterwards to prevent disclosure of information during enumeration.
 
 
 
-![phpinfo](Project2_images/php_info_webpage.png)
-![phpinfo delete](Project2_images/php_info_deleted.png)
+![phpinfo](media/Project2_images/php_info_webpage.png)
+![phpinfo delete](media/Project2_images/php_info_deleted.png)
 
 * The final step for the LEMP stack was to setup data retrieval from a MySQL database using php
 
 A database was created:
-![database creation](Project2_images/database_creation.png)
+![database creation](media/Project2_images/database_creation.png)
 
 A user was also created for the management of the database:
 
-![Creating a user and granting privilege](Project2_images/privileged_user_creation.png)
+![Creating a user and granting privilege](media/Project2_images/privileged_user_creation.png)
 A closer look at the image above will show you how a strong password policy is enforced after the securing the mysql-server
 
 Next, the test_user logged into the database to populate it:
-![test user populating the database](Project2_images/database_populating.png)
+![test user populating the database](media/Project2_images/database_populating.png)
 
 Finally, a php script was written to retrieve data from the database: 
-![script to retrieve data from webpage using php](Project2_images/php_retrieval.png)
+![script to retrieve data from webpage using php](media/Project2_images/php_retrieval.png)
 
 As you can see from the screenshot below, Accessing the webpage shows data pulled from the database:
-![Accessing the script through the browser](Project2_images/todo_list_webpage.png)
+![Accessing the script through the browser](media/Project2_images/todo_list_webpage.png)

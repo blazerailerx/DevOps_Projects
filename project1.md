@@ -14,7 +14,7 @@ sudo apt install apache2 mysql-server php libapache2-mod-php php-mysql
 ```
 
 **Opened ports on the firewall to accept incoming HTTP and HTTPS traffic through the security group:**
-![open ports](project1_images/ports_opened.png)
+![open ports](media/Project1_images/ports_opened.png)
 
 
 Confirmed the apache server was running locally and also accessed it via the given public ip addresss.
@@ -28,7 +28,7 @@ curl http://localhost:80
 mysql_secure_installation
 ```
 
-![SQL server running](project1_images/mysql-server.png)
+![SQL server running](media/Project1_images/mysql-server.png)
 
 Apache has the capability of hosting more than one website on the server, this can be configured
 **creating a virtual host on apache server and setting phpmyadmin:**
@@ -73,7 +73,7 @@ sudo a2dissite 000-default
 ```bash
 sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectlamp/index.html
 ```
-![LAMP stack working](project1_images/webpage_created.png)
+![LAMP stack working](media/Project1_images/webpage_created.png)
 
 Reorder the preference start page:
 `sudo vi /etc/apache2/mods-enabled/dir.conf`
@@ -94,6 +94,6 @@ The changes only took place after restarting the apache service
 
 sudo systemctl restart apache2
 ```
-![phpmyadmin working](project1_images/Php_enabled.png)
+![phpmyadmin working](media/Project1_images/Php_enabled.png)
 
 *However, It is adviceable to remove the phpmyadmin file as it could disclose information to anyone enumerating the site for information.*
