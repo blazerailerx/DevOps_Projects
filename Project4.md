@@ -3,7 +3,7 @@
 ## MEAN Stack Implementation
 
 Summary: The MEAN stack refers to web technology stack used to build web based application from the back-end to the front-end with Javascript.
-MEAN stands for MongoDB, Express.js, AngularJS and Node.js
+MEAN stands for MongoDB, Express.js, AngularJS and Node.js.
 
 
 * ### Installing NodeJS
