@@ -2,7 +2,7 @@
 
 ## Shell Scripting (Automatically onboarding Users)
 
-Summary:Shell scripting refers the chaining of commands into a script for execution through a shell.
+Summary: Shell scripting refers the chaining of commands into a script for execution through a shell.
 Anthing from a single command or a series of command to be executed by the shell through scripts.
 In this project, an admin will create a script to onboard a list of 20 users on to a system by creating 
 a group for the users called "developers", creatin user accounts for the users with home directories for each user,
