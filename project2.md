@@ -16,7 +16,7 @@ The project was hosted on AWS cloud. On an Ubuntu 20.04 lts Linux instance.
 
 Confirmed the web server was running by checking the status of the service:
 ```bash
-sudo systemctl status apache2
+sudo systemctl enable nginx
 ```
 ![Status of the web server](media/Project2_images/nginx_running.png)
 
