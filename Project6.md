@@ -23,10 +23,33 @@ The attached disks were confirmed using the command below
 ```bash
 lsblk
 ```
-Then formatted with the commmand below, changes to the partition table were written with the `w` option:
+Then formatted with the commmand below, to format the partitions to Linux LVM filesystem using `8e00` and the changes to the partition table were written with the `w` option:
 ```bash
 sudo gdisk /dev/xvdf
+sudo gdisk /dev/xvdg
+sudo gdisk /dev/xvdh
 ```
+![](media/Project6_images/formatting_disks.png)
+
+After formatting the partitions, physical volumes were created out of them using the pvcreate utility
+```bash
+sudo pvcreate /dev/xvdf1 /dev/xvdg1 /dev/xvdh1
+```
+![](media/Project6_images/pvs.png)
+
+These physical volumes were combined into a volume group called webdata as shown below
+```bash
+sudo vgcreate webdata-vg /dev/xvdf1 /dev/xvdg1 /dev/xvdh1
+```
+![](media/Project6_images/volume_group.png)
+
+The newly created volume group was split into two (2) to form two (2) equal Logical volumes
+```bash
+sudo lvcreate -L 14G -n apps-lv webdata-vg
+sudo lvcreate -L 14G -n logs-lv webdata-vg
+sudo pvs
+```
+![](media/Project6_images/web_logical_volumes.png)
 
 
 
