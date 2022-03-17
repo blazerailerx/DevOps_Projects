@@ -197,17 +197,23 @@ FLUSH PRIVILEGES;
 SHOW DATABASES;
 exit
 ```
+![Database creation](media/Project6_images/db_create.png)
 
-Over at the web server, configurations were done to test the connection to the remote DB server
+
+Over at the web server, mysql-client was installed to test the connection to the remote DB server
 ```bash
 sudo yum install mysql
 sudo mysql -u webuser -p -h <DB-Server-Private-IP-address>
 ```
+![MySQL client connection test](media/Project6_images/conn_test.png)
+
+
+Then the wordpress configuration file was edited appropriately to connect to the remote DB.
 ```bash
+sudo vi /var/www/html/wordpress/wp-config.php
 ```
-```bash
-```
-![](media/Project6_images/)
-![](media/Project6_images/)
-![](media/Project6_images/)
-![](media/Project6_images/)
+![Wordpress config file](media/Project6_images/wp-config.png)
+
+
+After editing the configuration file, our wordpress website is available for set up as seen below.
+![Database connection successful. Site is okay for configuration](media/Project6_images/wordpress_connect.png)
