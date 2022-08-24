@@ -33,3 +33,13 @@ The next resource that was created was the launch template for the autoscaling g
 The launched template was selected to create used at the creation of the autoscaling group. The external load balancer was added to the ASG
 
 ![](media/Project15_images/)
+
+After NGINX is installed on the proxy server, it became accessible through the DNS address of the load balancer.
+
+A hosted zone was created on route 53 with the project name vecnadynamics, and then a record tooling.vecnadynamics.com was created afterwards. 
+![](media/Project15_images/)
+Now to the third layer of the architecture.
+
+Proactively, a security group was created for the subnet hosting the web servers. Allowing traffic from the Bastion and the internal load balancer. 
+![](media/Project15_images/)
+
