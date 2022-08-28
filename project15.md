@@ -34,6 +34,7 @@ The launched template was selected to create used at the creation of the autosca
 
 ![](media/Project15_images/)
 
+<<<<<<< HEAD
 The servers were spun up by changing the desired capacity of the Autoscaling group.
 
 SSH forwarding was used for easier administration of the servers. The public key was added to the ssh-agent running on the host used to connect to our remote servers with the following command.
@@ -77,3 +78,13 @@ sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.
 sudo yum install -y dnf-utils http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 sudo yum install -y nginx git
 sudo systemctl restart nginx
+=======
+After NGINX is installed on the proxy server, it became accessible through the DNS address of the load balancer.
+
+A hosted zone was created on route 53 with the project name vecnadynamics, and then a record tooling.vecnadynamics.com was created afterwards. 
+![](media/Project15_images/)
+Now to the third layer of the architecture.
+
+Proactively, a security group was created for the subnet hosting the web servers. Allowing traffic from the Bastion and the internal load balancer. 
+![](media/Project15_images/)
+
