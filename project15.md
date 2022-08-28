@@ -34,6 +34,51 @@ The launched template was selected to create used at the creation of the autosca
 
 ![](media/Project15_images/)
 
+<<<<<<< HEAD
+The servers were spun up by changing the desired capacity of the Autoscaling group.
+
+SSH forwarding was used for easier administration of the servers. The public key was added to the ssh-agent running on the host used to connect to our remote servers with the following command.
+
+```bash
+ssh-add <publickey.pem>
+```
+Afterwards, the public server was logged into with the "-A" flag and the key was passed over to subsequent servers.
+
+One of the servers was CentOS 8 which is no longer supported and so there had to be a workaround to update it. Below is the steps for the workaround.
+
+#### Step 1: Go to the /etc/yum.repos.d/ directory.
+```bash
+cd /etc/yum.repos.d/
+```
+
+#### Step 2: Run the below commands
+```bash
+sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+```
+
+#### Step 3: Now run the yum update
+```bash
+yum update -y
+```
+
+```bash
+#!/bin/bash
+cd /etc/yum.repos.d/
+sudo sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+sudo sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+sudo yum update -y
+sudo yum install -y nginx git
+sudo systemctl restart nginx
+sudo systemctl enable nginx
+```
+
+sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+sudo yum install -y dnf-utils http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+sudo yum install -y nginx git
+sudo systemctl restart nginx
+=======
 After NGINX is installed on the proxy server, it became accessible through the DNS address of the load balancer.
 
 A hosted zone was created on route 53 with the project name vecnadynamics, and then a record tooling.vecnadynamics.com was created afterwards. 
