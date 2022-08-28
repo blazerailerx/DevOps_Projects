@@ -17,6 +17,7 @@ A MySQL database would be used to handle the data tier. Two(2) RedHat Linux serv
 
     ```bash
     sudo yum update -y
+    sudo yum install lvm2
     ```
 
     The attached disks were confirmed using the command below 
