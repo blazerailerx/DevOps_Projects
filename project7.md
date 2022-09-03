@@ -23,10 +23,12 @@ After booting up, the disks were prepared for use by creating the Linux LVM part
 LVM was used to configure the disks and partioned into three partitions with
 ![](media/Project7_images/logical_volumes_created.png)
 
+There logical partitions were split across the 3 disks which will contain as shown in the image below
+![](media/Project7_images/lvm_created.png)
 
-
+Then the NFS server utility was installed
 ![](media/Project7_images/nfs-utils_running.png)
-![](media/Project7_images/)
+
 ![](media/Project7_images/)
 ![](media/Project7_images/)
 ![](media/Project7_images/)
