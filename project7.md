@@ -27,7 +27,30 @@ There logical partitions were split across the 3 disks which will contain as sho
 ![](media/Project7_images/lvm_created.png)
 
 Then the NFS server utility was installed
-![](media/Project7_images/nfs-utils_running.png)
+![NFS server software installed](media/Project7_images/nfs-utils_running.png)
+
+An NFS client was installed on the web servers and the database server
+```bash
+sudo yum install nfs-utils nfs4-acl-tools -y
+```
+
+
+
+
+
+
+
+
+
+
+
+
+```sql
+create user 'myuser'@'172.31.80.0/20' IDENTIFIED BY 'password';
+```
+
+
+
 
 ![](media/Project7_images/)
 ![](media/Project7_images/)

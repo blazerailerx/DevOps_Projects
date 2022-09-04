@@ -5,14 +5,17 @@ Summary: This project is aimed at building two websites for a company called Vec
 1 VPC was created for the project
 ![](media/Project15_images/AWS-Architecture.png)
 8 subnets were created from the VPC for each tier of the architecture
-![](media/Project15_images/)
+![](media/Project15_images/creating_subnets.png)
+![](media/Project15_images/created_subnets.png)
+
 An internet gateway was created for the VPC
-![](media/Project15_images/)
+![](media/Project15_images/igw.png)
 Then a route table was created, added to the two public subnets along with routes to all networks 0.0.0.0/0 to enable routing of traffic between that subnet and the internet.
-![](media/Project15_images/)
+![](media/Project15_images/rt_public_subnets.png)
 ! A NAT gateway was created and given an elastic ip address for the public subnet to enable resources on the private subnet communicate externally with the internet without the possibility of external resources communicating with the resources.
 Note: NAT gateways are expensive so for this scenario only one was deployed to save cost.
-![](media/Project15_images/)
+![](media/Project15_images/nat_gateway.png)
+![](media/Project15_images/nat-gateway-subnets.png)
 
 Another route table was created for the proxy subnet and the business subnet because they contain resource that would need to pull data using the internet through the nat gateway. This route table will be responsible for routing traffic from the proxy subnets in both availability zones to the internet through the NAT gateway.
 ![](media/Project15_images/)
