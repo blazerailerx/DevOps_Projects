@@ -79,7 +79,10 @@ On the web server, the web application directory `/var/www/` was mounted on the 
 create user 'myuser'@'172.31.80.0/20' IDENTIFIED BY 'password';
 ```
 
-
+```bash
+sudo mv /etc/httpd/conf.d/welcome.conf /etc/httpd/conf.d/welcome.conf_backup
+sudo systemctl restart httpd
+```
 
 
 ![](media/Project7_images/)
