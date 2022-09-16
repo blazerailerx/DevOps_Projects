@@ -24,7 +24,7 @@ LVM was used to configure the disks and partioned into three partitions with
 
 ![Logical volumes partitioned](media/Project7_images/logical_volumes_created.png)
 
-There logical partitions were split across the 3 disks which wasp spread across the disks as shown in the image below.
+There logical partitions were split across the 3 disks which were spread across the disks as shown in the image below.
 
 ![View of the logical volumes on the disk](media/Project7_images/lvm_created.png)
 
@@ -66,8 +66,10 @@ sudo yum install nfs-utils nfs4-acl-tools -y
 
 On the web server, the web application directory `/var/www/` was mounted on the app partition on the NFS server. Similarly, the logs folder `/var/logs` was mounted on the logs partition of the NFS server
 
+It is worth nothing that mounting over an existing directory overwrites the existing contents of the directory. So the original contents were backed up before the mount operation, and the contents replaced afterwards. 
+After mounting successfully, the mount details were entered into `/etc/fstab` for persistence. And tested with the command `mount -a` was used to test the configuration. 
 
-
+![](media/Project7_images/)
 
 
 
@@ -85,7 +87,6 @@ sudo systemctl restart httpd
 ```
 
 
-![](media/Project7_images/)
 ![](media/Project7_images/)
 ![](media/Project7_images/)
 ![](media/Project7_images/)
