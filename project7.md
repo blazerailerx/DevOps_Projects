@@ -156,6 +156,11 @@ A database scrip was ran, to populate the database with the needed tables
 
 Another admin user was added to the users table for the tooling website
 
+```sql
+INSERT INTO users 
+VALUES (2, 'myuser', '5f4dcc3b5aa765d61d8327deb882cf99', 'user@mail.com', 'admin', '1');
+```
+
 ![](media/Project7_images/db_user_entry.png)
 
 And this user was used to login to the tooling website hosted on all web servers.
