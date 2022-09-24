@@ -1,7 +1,8 @@
 # Project 15
 
-## AWS Cloud solution for 2 Company Websites Using a Reverse Proxy Technology 
-Summary: This project is aimed at building two websites for a company called Vecna Dynamics (😉). One of the websites would be the main production website and the other would be a tooling website for their devops team. 
+## AWS Cloud solution for 2 Company Websites Using a Reverse Proxy Technology
+
+Summary: This project is aimed at building two websites for a company called Vecna Dynamics (😉). One of the websites would be the main production website and the other would be a tooling website for their devops team.
 1 VPC was created for the project
 ![](media/Project15_images/AWS-Architecture.png)
 8 subnets were created from the VPC for each tier of the architecture
@@ -45,22 +46,26 @@ SSH forwarding was used for easier administration of the servers. The public key
 ```bash
 ssh-add <publickey.pem>
 ```
+
 Afterwards, the public server was logged into with the "-A" flag and the key was passed over to subsequent servers.
 
 One of the servers was CentOS 8 which is no longer supported and so there had to be a workaround to update it. Below is the steps for the workaround.
 
 #### Step 1: Go to the /etc/yum.repos.d/ directory.
+
 ```bash
 cd /etc/yum.repos.d/
 ```
 
 #### Step 2: Run the below commands
+
 ```bash
 sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
 sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
 ```
 
 #### Step 3: Now run the yum update
+
 ```bash
 yum update -y
 ```
@@ -84,16 +89,26 @@ sudo systemctl restart nginx
 =======
 After NGINX is installed on the proxy server, it became accessible through the DNS address of the load balancer.
 
-A hosted zone was created on route 53 with the project name vecnadynamics, and then a record tooling.vecnadynamics.com was created afterwards. 
+A hosted zone was created on route 53 with the project name vecnadynamics, and then a record tooling.vecnadynamics.com was created afterwards.
 ![](media/Project15_images/)
 Now to the third layer of the architecture.
 
-Proactively, a security group was created for the subnet hosting the business web servers. Allowing traffic from the Bastion and the internal load balancer. 
+Proactively, a security group was created for the subnet hosting the business web servers. Allowing traffic from the Bastion and the internal load balancer.
 ![](media/Project15_images/)
 
-An internal load balancer was created to route traffic to the web servers hosting the tooling website. Then a target group for the web servers created and linked to the load balancer. And then an Autoscaling group was created to supply the target group EC2 instances. 
+An internal load balancer was created to route traffic to the web servers hosting the tooling website. Then a target group for the web servers created and linked to the load balancer. And then an Autoscaling group was created to supply the target group EC2 instances.
 The internal load balancer was configured with rules to route traffic betewen the main Wordpress website and the tooling website.
 
 A launch template, as well as an Autoscaling group was created for the tooling website and the main wordpress website. With installations of apache web servers installed in the instances.
 
 It was time for the final tier (Data Tier) which handles all our data. Firstly, a security group was created to only accept traffic from the web servers(Wordpress and tooling websites) in the business tier.
+
+A config file `www.tooling.vecnadynamics.com.conf` was created in /etc/nginx/default.d
+server {
+listen 80;
+server_name www.tooling.vecnadynamics.com;
+location / {
+proxy_pass internal-vecnadynamics-internal-alb-434449287.us-east-1.elb.amazonaws.com;
+proxy_set_header Host $host;
+}
+}
