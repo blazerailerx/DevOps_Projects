@@ -72,7 +72,6 @@ yum update -y
 
 ```bash
 #!/bin/bash
-cd /etc/yum.repos.d/
 sudo sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
 sudo sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
 sudo yum update -y
@@ -99,16 +98,41 @@ Proactively, a security group was created for the subnet hosting the business we
 An internal load balancer was created to route traffic to the web servers hosting the tooling website. Then a target group for the web servers created and linked to the load balancer. And then an Autoscaling group was created to supply the target group EC2 instances.
 The internal load balancer was configured with rules to route traffic betewen the main Wordpress website and the tooling website.
 
+```bash
+#!/bin/bash
+sudo sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+sudo sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+sudo yum update -y
+sudo yum install -y httpd git
+sudo systemctl restart httpd
+sudo systemctl enable httpd
+```
+
 A launch template, as well as an Autoscaling group was created for the tooling website and the main wordpress website. With installations of apache web servers installed in the instances.
 
 It was time for the final tier (Data Tier) which handles all our data. Firstly, a security group was created to only accept traffic from the web servers(Wordpress and tooling websites) in the business tier.
 
-A config file `www.tooling.vecnadynamics.com.conf` was created in /etc/nginx/default.d
+A config file `www.tooling.vecnadynamics.com.conf` was created in /etc/nginx/conf.d/
 server {
 listen 80;
 server_name www.tooling.vecnadynamics.com;
 location / {
-proxy_pass internal-vecnadynamics-internal-alb-434449287.us-east-1.elb.amazonaws.com;
+http://proxy_pass internal-vecnadynamics-internal-alb-434449287.us-east-1.elb.amazonaws.com;
 proxy_set_header Host $host;
 }
 }
+server {
+listen 80;
+location / {
+proxy_pass http://internal-vecnadynamics-internal-alb-434449287.us-east-1.elb.amazonaws.com;
+proxy_set_header Host $host;
+}
+}
+
+A security group was created for the RDS to restrict traffic to just connections from the web servers.
+
+Then Customer Managed Keys were created using the Key Management Service for encryption of the database.
+
+A subnet group was created consisting of the subnets where the RDS is located.
+
+After creating the key and subnet group, the RDS database was created
